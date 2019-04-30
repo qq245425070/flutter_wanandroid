@@ -31,8 +31,8 @@ class ChartPublicState extends State<ChartPublicPage>{
     return Scaffold(
       body: SmartRefresher(
         enableOverScroll: true,
-        enablePullDown: hasMore,
-        enablePullUp:false,
+        enablePullDown: false,
+        enablePullUp: hasMore,
         controller: _controller,
         footerConfig: LoadConfig(),
         footerBuilder: (context,mode){
@@ -64,6 +64,7 @@ class ChartPublicState extends State<ChartPublicPage>{
         itemCount = mData.length;
         hasMore = !value.over;
         if(mounted) {
+          _controller.sendBack(false, RefreshStatus.idle);
           setState(() {});
         }
       }
